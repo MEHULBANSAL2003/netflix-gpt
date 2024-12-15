@@ -1,13 +1,12 @@
-
-import './App.css'
+import Body from "./components/Body.jsx";
 
 function App() {
 
   return (
-    <>
-    <h1 className='text-xl font-bold'>hello world</h1>
+    <div>
+      <Body> </Body>
     
-    </>
+    </div>
   )
 }
 
