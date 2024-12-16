@@ -56,16 +56,16 @@ const Login = () => {
           />
         )}
         {errMessage && errMessage.charAt(0) == "N" && (
-          <p className="text-red-500 font-bold py-0">{errMessage}</p>
+          <p className="text-red-500  py-0">{errMessage}</p>
         )}
         <input
           ref={email}
           type="text"
           placeholder="Enter your email"
-          className="p-3 my-3 w-full rounded bg-transparent  "
+          className="p-3 my-3 w-full rounded bg-transparent"
         />
         {errMessage && errMessage.charAt(0) == "E" && (
-          <p className="text-red-500 font-bold py-0">{errMessage}</p>
+          <p className="text-red-500 py-0">{errMessage}</p>
         )}
 
         <input
