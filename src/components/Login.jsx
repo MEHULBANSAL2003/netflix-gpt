@@ -1,9 +1,36 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Body from "./Body";
 import Header from "./Header";
+import {
+  checkSignInValidData,
+  checkSignUpValidData,
+} from "../utilities/validation";
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
+
+  const [errMessage, setErrMessage] = useState(null);
+
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+
+  const handleClick = (e) => {
+    if (isSignIn) {
+      const message = checkSignInValidData(
+        email.current.value,
+        password.current.value
+      );
+      setErrMessage(message);
+    } else {
+      const message = checkSignUpValidData(
+        name.current.value,
+        email.current.value,
+        password.current.value
+      );
+      setErrMessage(message);
+    }
+  };
 
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
@@ -12,29 +39,49 @@ const Login = () => {
     <div>
       <Header />
 
-      <form className=" w-3/12 absolute p-12 bg-black bg-opacity-80  my-36 mx-auto right-0 left-0 text-white">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className=" w-3/12 absolute p-12 bg-black bg-opacity-80  my-36 mx-auto right-0 left-0 text-white"
+      >
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign in" : "Sign up"}
         </h1>
 
         {!isSignIn && (
           <input
+            ref={name}
             type="text"
-            placeholder="Name"
+            placeholder="Full name"
             className="p-3 my-3 w-full rounded bg-transparent "
           />
         )}
+        {errMessage && errMessage.charAt(0) == "N" && (
+          <p className="text-red-500 font-bold py-0">{errMessage}</p>
+        )}
         <input
+          ref={email}
           type="text"
           placeholder="Enter your email"
-          className="p-3 my-3 w-full rounded bg-transparent "
+          className="p-3 my-3 w-full rounded bg-transparent  "
         />
+        {errMessage && errMessage.charAt(0) == "E" && (
+          <p className="text-red-500 font-bold py-0">{errMessage}</p>
+        )}
+
         <input
+          ref={password}
           type="password"
           placeholder="password"
           className="p-3 my-3 w-full rounded bg-transparent"
         />
-        <button className="p-2 my-6 rounded bg-red-600 hover:bg-red-700 w-full">
+        {errMessage && errMessage.charAt(0) == "P" && (
+          <p className="text-red-500 font-bold py-0">{errMessage}</p>
+        )}
+
+        <button
+          className="p-2 my-6 rounded bg-red-600 hover:bg-red-700 w-full"
+          onClick={handleClick}
+        >
           {isSignIn ? "Sign in" : "Sign up"}
         </button>
         <div className="flex space-x-2">
@@ -57,7 +104,7 @@ const Login = () => {
         </div>
       </form>
 
-      <Body/>
+      <Body />
     </div>
   );
 };
