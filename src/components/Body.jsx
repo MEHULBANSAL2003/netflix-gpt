@@ -1,25 +1,10 @@
 import React from 'react'
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
-
-import Login from "./Login.jsx";
-import Browse from './Browse.jsx';
+import { BG_IMAGE } from '../utilities/constants'
 
 const Body = () => {
-
-const appRouter=createBrowserRouter([
-  {
-    path:"/",
-    element:<Login/>
-  },
-  {
-     path:"/browse",
-     element:<Browse/>
-  }
-])
-
   return (
     <div>
-     <RouterProvider router={appRouter}/>
+       <img src={BG_IMAGE} alt="background image" />
     </div>
   )
 }

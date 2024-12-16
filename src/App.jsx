@@ -1,10 +1,10 @@
-import Body from "./components/Body.jsx";
+import Index from "./routes"
 
 function App() {
 
   return (
     <div>
-      <Body> </Body>
+     <Index/>
     
     </div>
   )
