@@ -1,11 +1,10 @@
 const express=require("express");
+const { handleSignUp } = require("../controllers/user");
 const userRouter=express.Router();
 
 
 
-userRouter.post("/login",(req,res)=>{
-    res.send("hello");
-})
+userRouter.post("/signup",handleSignUp);
 
 
 
