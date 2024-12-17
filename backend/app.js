@@ -1,31 +1,16 @@
 require("dotenv").config();
 const express =require("express");
 const { connectDB } = require("./config/database");
-const { User } = require("./model/User");
+const { userRouter } = require("./routers/user");
+
 const app=express();
 const port=process.env.PORT
 
 app.use(express.json());
 
 
-app.post("/signup",async(req,res)=>{
-try{
-    let {name,email,password}=req.body;
-    let user1=new User({name,email,password});
+app.use("/",userRouter);
 
-    await user1.save();
-
-    console.log("user added");
-    res.send("added user");
-  
-}
-catch(err){
-    console.log("error :",err.message);
-    res.send("error");
-}
-    
-
-})
 
 connectDB().then(()=>{
     console.log("connected to db succesully");
