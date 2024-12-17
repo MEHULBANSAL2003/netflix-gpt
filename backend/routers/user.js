@@ -1,10 +1,12 @@
 const express=require("express");
-const { handleSignUp } = require("../controllers/user");
+const { handleSignUp, handleLogin } = require("../controllers/user");
 const userRouter=express.Router();
 
 
 
 userRouter.post("/signup",handleSignUp);
+
+userRouter.post("/login",handleLogin);
 
 
 

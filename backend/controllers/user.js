@@ -40,6 +40,34 @@ const handleSignUp=async(req,res)=>{
     
 };
 
+const handleLogin=async (req,res)=>{
+
+    try{
+    let {email,password}=req.body;
+
+    let registeredUser=await User.findOne({email:email})
+
+    if(!registeredUser) throw new Error("User doesn't exists. Sign up first");
+ 
+    const isPasswordMatched=await bcrypt.compare(password,registeredUser.password);
+    if(!isPasswordMatched) throw new Error("password is incorrect");
+
+    res.status(201).json({
+        result:"success",
+        message:"logged in successfully",
+        data:registeredUser
+    })
+
+    }
+    catch(err){
+        res.status(400).json({
+            result:"error",
+            message:err.message
+       })
+    }
+
+}
 
 
-module.exports={handleSignUp};
+
+module.exports={handleSignUp,handleLogin};
