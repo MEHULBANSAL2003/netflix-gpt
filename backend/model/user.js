@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const validator=require("validator");
+const bcrypt=require("bcrypt");
 
 const userSchema=new mongoose.Schema({
 
@@ -31,6 +32,15 @@ const userSchema=new mongoose.Schema({
     }
 
 },{timestamps:true});
+
+
+userSchema.methods.validatePassword=async function(password){
+
+    const isPasswordMatched=await bcrypt.compare(password,this.password);
+
+    return isPasswordMatched;
+
+}
 
 const User=mongoose.model("User",userSchema);
 

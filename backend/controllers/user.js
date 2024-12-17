@@ -49,7 +49,7 @@ const handleLogin=async (req,res)=>{
 
     if(!registeredUser) throw new Error("User doesn't exists. Sign up first");
  
-    const isPasswordMatched=await bcrypt.compare(password,registeredUser.password);
+    const isPasswordMatched=await registeredUser.validatePassword(password);
     if(!isPasswordMatched) throw new Error("password is incorrect");
 
     res.status(201).json({
