@@ -5,10 +5,25 @@ const { User } = require("./model/User");
 const app=express();
 const port=process.env.PORT
 
+app.use(express.json());
 
-app.post("/signup",(req,res)=>{
+
+app.post("/signup",async(req,res)=>{
+try{
+    let {name,email,password}=req.body;
+    let user1=new User({name,email,password});
+
+    await user1.save();
+
+    console.log("user added");
+    res.send("added user");
   
-    console.log(req.body);
+}
+catch(err){
+    console.log("error :",err.message);
+    res.send("error");
+}
+    
 
 })
 
