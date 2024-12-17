@@ -2,8 +2,6 @@ const { User } = require("../model/User");
 const { validateSignUpData } = require("../utils/validation");
 const bcrypt=require("bcrypt");
 
-
-
 const handleSignUp=async(req,res)=>{
   
    try{
@@ -52,6 +50,12 @@ const handleLogin=async (req,res)=>{
     const isPasswordMatched=await registeredUser.validatePassword(password);
     if(!isPasswordMatched) throw new Error("password is incorrect");
 
+    const token=await registeredUser.generateJWT();
+
+    res.cookie("token", token, {
+        expires: new Date(Date.now() + 1 * 3600000),
+      });
+          
     res.status(201).json({
         result:"success",
         message:"logged in successfully",

@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const validator=require("validator");
 const bcrypt=require("bcrypt");
+const jwt=require("jsonwebtoken");
 
 const userSchema=new mongoose.Schema({
 
@@ -40,6 +41,13 @@ userSchema.methods.validatePassword=async function(password){
 
     return isPasswordMatched;
 
+}
+
+userSchema.methods.generateJWT=async function(){
+
+    const token= await jwt.sign({_id:this._id},process.env.JWT_SECRET_KEY);
+    console.log(token);
+    return token;
 }
 
 const User=mongoose.model("User",userSchema);
