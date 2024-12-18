@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import Body from "./Body";
 import Header from "./Header";
 import {
@@ -7,7 +7,6 @@ import {
   checkSignUpValidData,
 } from "../utilities/validation";
 import axios from "axios";
-
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
@@ -18,14 +17,39 @@ const Login = () => {
   const password = useRef(null);
   const name = useRef(null);
 
-  const handleClick = async() => {
+  const handleClick = async () => {
     if (isSignIn) {
       const message = checkSignInValidData(
         email.current.value,
         password.current.value
-      );      
+      );
       setErrMessage(message);
-     
+
+      if (message === null) {
+        const URL = `${import.meta.env.VITE_BACKEND_URL}/login`;
+        try {
+          const response = await axios({
+            method: "post",
+            url: URL,
+            data: {
+              email: email.current.value,
+              password: password.current.value,
+            },
+            withCredentials: true,
+          });
+
+          if (response.data.result == "success") {
+            toast.success(response.data.message);
+            email.current.value = "";
+            password.current.value = "";
+            
+          }
+        } catch (err) {
+          toast.error(err.response.data.message);
+          email.current.value = "";
+            password.current.value = "";
+        }
+      }
     } else {
       const message = checkSignUpValidData(
         name.current.value,
@@ -34,41 +58,32 @@ const Login = () => {
       );
       setErrMessage(message);
 
-      if(message===null){
-         
-        const URL=`${import.meta.env.VITE_BACKEND_URL}/signup`;
-        try{
-        const response=await axios({
-          method:"post",
-          url:URL,
-          data:{
-            name:name.current.value,
-            email:email.current.value,
-            password:password.current.value
-          },
-          withCredentials:true
-          
-        });
+      if (message === null) {
+        const URL = `${import.meta.env.VITE_BACKEND_URL}/signup`;
+        try {
+          const response = await axios({
+            method: "post",
+            url: URL,
+            data: {
+              name: name.current.value,
+              email: email.current.value,
+              password: password.current.value,
+            },
+            withCredentials: true,
+          });
 
-        
-
-        if(response.data.result=="success"){
-          toast.success(response.data.message);
+          if (response.data.result == "success") {
+            toast.success(response.data.message);
+            name.current.value="";
+            email.current.value = "";
+            password.current.value = "";
+          }
+        } catch (err) {
+          toast.error(err.response.data.message);
+          name.current.value="";
+            email.current.value = "";
+            password.current.value = "";
         }
-
-        
-        
-      }
-      catch(err){
-        console.log(err.response.data.message);
-        toast.error(err.response.data.message);
-
-      }
-
-        
-
-
-
       }
     }
   };

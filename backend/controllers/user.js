@@ -24,7 +24,7 @@ const handleSignUp=async(req,res)=>{
 
     res.status(201).json({
         result:"success",
-        message:"user saved successfully"
+        message:"user registered successfully"
     })
      
       

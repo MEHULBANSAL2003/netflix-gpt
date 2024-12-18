@@ -30,7 +30,7 @@ export const checkSignUpValidData = (name, email, password) => {
       password
     );
 
-  const isNameValid = /^[a-zA-Z]+$/.test(name);
+  const isNameValid = /^[a-zA-Z]+([ '-][a-zA-Z]+)*$/ .test(name);
 
   if (!isNameValid) return "Name is not valid";
   if (!isEmailValid) return "Email is not valid";
