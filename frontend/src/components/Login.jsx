@@ -5,6 +5,8 @@ import {
   checkSignInValidData,
   checkSignUpValidData,
 } from "../utilities/validation";
+import axios from "axios";
+
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
@@ -15,13 +17,14 @@ const Login = () => {
   const password = useRef(null);
   const name = useRef(null);
 
-  const handleClick = (e) => {
+  const handleClick = async() => {
     if (isSignIn) {
       const message = checkSignInValidData(
         email.current.value,
         password.current.value
-      );
+      );      
       setErrMessage(message);
+     
     } else {
       const message = checkSignUpValidData(
         name.current.value,
@@ -29,6 +32,35 @@ const Login = () => {
         password.current.value
       );
       setErrMessage(message);
+
+      if(message===null){
+         
+        const URL=`${import.meta.env.VITE_BACKEND_URL}/signup`;
+        try{
+        const response=await axios({
+          method:"post",
+          url:URL,
+          data:{
+            name:name.current.value,
+            email:email.current.value,
+            password:password.current.value
+          },
+          withCredentials:true
+          
+        });
+        
+        
+      }
+      catch(err){
+        console.log(err.response.data.message);
+
+      }
+
+        
+
+
+
+      }
     }
   };
 
