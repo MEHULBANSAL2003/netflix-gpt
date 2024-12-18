@@ -9,12 +9,16 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-
   const [errMessage, setErrMessage] = useState(null);
 
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+
+const handleForgotPasword=()=>{
+  // to be implemented later..!!
+
+}
 
   const togglePasswordVisibility = () => {
     if (password.current) {
@@ -145,6 +149,7 @@ const Login = () => {
             {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
           </button>
         </div>
+        {isSignIn && <p className="cursor-pointer text-slate-200" onClick={handleForgotPasword}>Forgot Password?</p>}
 
         {errMessage && errMessage.charAt(0) == "P" && (
           <p className="text-red-500 font-bold py-0">{errMessage}</p>
