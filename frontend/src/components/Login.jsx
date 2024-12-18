@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { toast } from 'react-toastify';
 import Body from "./Body";
 import Header from "./Header";
 import {
@@ -48,11 +49,19 @@ const Login = () => {
           withCredentials:true
           
         });
+
+        
+
+        if(response.data.result=="success"){
+          toast.success(response.data.message);
+        }
+
         
         
       }
       catch(err){
         console.log(err.response.data.message);
+        toast.error(err.response.data.message);
 
       }
 
