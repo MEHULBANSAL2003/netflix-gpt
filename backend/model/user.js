@@ -46,7 +46,6 @@ userSchema.methods.validatePassword=async function(password){
 userSchema.methods.generateJWT=async function(){
 
     const token= await jwt.sign({_id:this._id},process.env.JWT_SECRET_KEY);
-    console.log(token);
     return token;
 }
 
