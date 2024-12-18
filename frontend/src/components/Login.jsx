@@ -2,20 +2,27 @@ import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Body from "./Body";
 import Header from "./Header";
-import {
-  checkSignInValidData,
-  checkSignUpValidData,
-} from "../utilities/validation";
+import {checkSignInValidData,checkSignUpValidData,} from "../utilities/validation";
 import axios from "axios";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [errMessage, setErrMessage] = useState(null);
 
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+
+  const togglePasswordVisibility = () => {
+    if (password.current) {
+      password.current.type =
+        password.current.type === "password" ? "text" : "password";
+    }
+    setShowPassword((prev) => !prev);
+  };
 
   const handleClick = async () => {
     if (isSignIn) {
@@ -42,12 +49,11 @@ const Login = () => {
             toast.success(response.data.message);
             email.current.value = "";
             password.current.value = "";
-            
           }
         } catch (err) {
           toast.error(err.response.data.message);
           email.current.value = "";
-            password.current.value = "";
+          password.current.value = "";
         }
       }
     } else {
@@ -74,15 +80,15 @@ const Login = () => {
 
           if (response.data.result == "success") {
             toast.success(response.data.message);
-            name.current.value="";
+            name.current.value = "";
             email.current.value = "";
             password.current.value = "";
           }
         } catch (err) {
           toast.error(err.response.data.message);
-          name.current.value="";
-            email.current.value = "";
-            password.current.value = "";
+          name.current.value = "";
+          email.current.value = "";
+          password.current.value = "";
         }
       }
     }
@@ -108,7 +114,7 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Full name"
-            className="p-3 my-3 w-full rounded bg-transparent "
+            className="p-3 my-3 w-full rounded bg-transparent border border-gray-400"
           />
         )}
         {errMessage && errMessage.charAt(0) == "N" && (
@@ -118,18 +124,28 @@ const Login = () => {
           ref={email}
           type="text"
           placeholder="Enter your email"
-          className="p-3 my-3 w-full rounded bg-transparent"
+          className="p-3 my-3 w-full rounded bg-transparent border border-gray-400"
         />
         {errMessage && errMessage.charAt(0) == "E" && (
           <p className="text-red-500 py-0">{errMessage}</p>
         )}
 
-        <input
-          ref={password}
-          type="password"
-          placeholder="password"
-          className="p-3 my-3 w-full rounded bg-transparent"
-        />
+        <div className="relative w-full my-3">
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="p-3 w-full rounded bg-transparent border border-gray-400 pr-12"
+          />
+          <button
+            onClick={togglePasswordVisibility}
+            className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-transparent text-white hover:text-slate-100"
+            type="button"
+          >
+            {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
+          </button>
+        </div>
+
         {errMessage && errMessage.charAt(0) == "P" && (
           <p className="text-red-500 font-bold py-0">{errMessage}</p>
         )}
