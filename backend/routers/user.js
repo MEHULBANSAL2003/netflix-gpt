@@ -1,5 +1,5 @@
 const express=require("express");
-const { handleSignUp, handleLogin } = require("../controllers/user");
+const { handleSignUp, handleLogin, handleLogout } = require("../controllers/user");
 const userRouter=express.Router();
 
 
@@ -7,6 +7,8 @@ const userRouter=express.Router();
 userRouter.post("/signup",handleSignUp);
 
 userRouter.post("/login",handleLogin);
+
+userRouter.post("/logout",handleLogout);
 
 
 

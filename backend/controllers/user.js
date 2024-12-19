@@ -73,5 +73,15 @@ const handleLogin=async (req,res)=>{
 }
 
 
+const handleLogout=async (req,res)=>{
+    res.cookie("token", null, { expires: new Date(Date.now()) });
 
-module.exports={handleSignUp,handleLogin};
+  res.json({
+    result: "success",
+    message: "logged out sucessfully",
+  });
+
+}
+
+
+module.exports={handleSignUp,handleLogin,handleLogout};
