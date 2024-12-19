@@ -13,9 +13,11 @@ const Header = () => {
       <img className="w-44" src={NETFLIX_LOGO} alt="Netflix Logo" />
       <div className="relative group">
         {/* Avatar Icon */}
+        {userInfo.email &&
         <h2 className="text-pink-400 text-2xl cursor-pointer">
           <FaUserAlt/>
         </h2>
+}
 
         {/* Dropdown Menu */}
         <div className="absolute right-0 mt-2 w-48 bg-black  text-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
