@@ -5,11 +5,18 @@ import Header from "./Header";
 import {checkSignInValidData,checkSignUpValidData,} from "../utilities/validation";
 import axios from "axios";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { useDispatch} from "react-redux";
+import { setUser } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [errMessage, setErrMessage] = useState(null);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+ 
 
   const email = useRef(null);
   const password = useRef(null);
@@ -51,8 +58,14 @@ const handleForgotPasword=()=>{
 
           if (response.data.result == "success") {
             toast.success(response.data.message);
+            const mail=email.current.value;
+          const Name=response?.data?.data?.name;
+            dispatch(setUser({name:Name,email:mail}));
             email.current.value = "";
             password.current.value = "";
+            
+            navigate("/browse");
+            
           }
         } catch (err) {
           toast.error(err.response.data.message);
@@ -84,9 +97,14 @@ const handleForgotPasword=()=>{
 
           if (response.data.result == "success") {
             toast.success(response.data.message);
+            const mail=email.current.value;
+             const Name=name.current.value
+            dispatch(setUser({name:Name,email:mail}));
+           
             name.current.value = "";
             email.current.value = "";
             password.current.value = "";
+            navigate("/browse");
           }
         } catch (err) {
           toast.error(err.response.data.message);

@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from './Header';
-import Body from './Body';
 import { BG_IMAGE } from '../utilities/constants';
 import { Link } from 'react-router-dom';
 
+
 const Home = () => {
+
   return (
     <div className="relative min-h-screen">
       <Header />
