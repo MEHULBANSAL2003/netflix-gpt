@@ -13,11 +13,15 @@ const userSlice=createSlice({
         setUser:(state,action)=>{
             state.name=action.payload.name,
             state.email=action.payload.email
+        },
+        removeUser:(state,action)=>{
+            state.name="",
+            state.email="";
         }
     }
 });
 
 
-export const {setUser}=userSlice.actions
+export const {setUser,removeUser}=userSlice.actions
 
 export default userSlice.reducer;
