@@ -36,7 +36,8 @@ const Header = () => {
             <li className="px-4 py-2 cursor-pointer" >{userInfo.name}</li>
             <li className="px-4 py-2 cursor-pointer">Manage Account</li>
             <li className="px-4 py-2 cursor-pointer">Settings</li>
-            <li className="px-14 py-4 cursor-pointer font-bold" onClick={handleLogout}>Logout</li>
+            <li className="px-14 py-4 cursor-pointer font-bold hover:underline underline-offset-2 decoration-2"onClick={handleLogout}>Logout</li>
+
           </ul>
         </div>
       </div>
