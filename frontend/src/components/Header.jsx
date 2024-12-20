@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NETFLIX_LOGO, USER_ICON } from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";
@@ -10,8 +10,7 @@ const Header = () => {
   const userInfo = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(userInfo);
-
+  
   const handleLogout = async () => {
     const URL = `${import.meta.env.VITE_BACKEND_URL}/logout`;
 
