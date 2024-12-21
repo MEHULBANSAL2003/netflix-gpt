@@ -1,16 +1,18 @@
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Login from "./components/Login";
-import Home from "./components/Home";
-import Browse from "./components/Browse";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect,Suspense ,lazy} from "react";
 import axios from "axios";
+import { setUser } from "./redux/userSlice";
+
+const Login = lazy(() => import("./components/Login"));
+const Home = lazy(() => import("./components/Home"));
+const Browse = lazy(() => import("./components/Browse"));
 
 function App() {
   const user = useSelector((store) => store.user);
-  //const [isLoggedInUser,setIsLoggedInUser]=useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getUser = async () => {
@@ -23,22 +25,25 @@ function App() {
         });
 
         if (response.data.result == "success") {
-          toast.success(response.data.message);
-       
+          if (!user.email) {
+            const name = response.data.data.name;
+            const email = response.data.data.email;
+            dispatch(setUser({ name, email }));
+          }
         }
-      } catch (err) {
-        toast.error(err.response.data.message);
-      }
+      } catch (err) {}
     };
 
     getUser();
   }, []);
 
   return (
+   
     <div>
       {/* <Login/>
      <ToastContainer />  */}
-      <Routes>
+     <Suspense fallback={<div className="text-center font-bold text-5xl">Loading...</div>}>
+     <Routes>
         <Route
           path={"/"}
           element={!user.email ? <Home /> : <Navigate to="/browse" />}
@@ -52,9 +57,11 @@ function App() {
           element={user.email ? <Browse /> : <Navigate to="/login" />}
         />
       </Routes>
+      </Suspense>
 
       <ToastContainer />
     </div>
+    
   );
 }
 

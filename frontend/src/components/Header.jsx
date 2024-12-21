@@ -41,7 +41,7 @@ const Header = () => {
           <img src={USER_ICON} alt="user_info" className="rounded" />
         )}
 
-        {/* Dropdown Menu */}
+      {userInfo.email && 
         <div className="absolute right-0 mt-2 w-48 bg-black  text-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <ul className="py-2">
             <li className="px-4 py-2 cursor-pointer">{userInfo.name}</li>
@@ -55,6 +55,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
+}
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ const handleLogin=async (req,res)=>{
     const token=await registeredUser.generateJWT();
 
     res.cookie("token", token, {
-        expires: new Date(Date.now() + 1 * 3600000),
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       });
           
     res.status(201).json({
