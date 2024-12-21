@@ -83,5 +83,17 @@ const handleLogout=async (req,res)=>{
 
 }
 
+const getUser=async(req,res)=>{
+  
+  res.status(201).json({
+    result:"success",
+    message:"user found Succesfully",
+    data: req.user
+  })
 
-module.exports={handleSignUp,handleLogin,handleLogout};
+
+};
+
+
+
+module.exports={handleSignUp,handleLogin,handleLogout,getUser};
