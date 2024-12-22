@@ -5,7 +5,7 @@ const ChangePassword = () => {
   return (
     < div>
       <Header />
-      <div className="max-w-md mx-auto px-10 py-12 rounded-md shadow-lg">
+      <div className="max-w-md mx-auto px-10 py-36 rounded-md shadow-lg">
         <h1 className="text-4xl font-extrabold mb-6">Change Password</h1>
         <p className="text-gray-400 mb-8">
           Protect your account with a unique password at least 8 characters long.
