@@ -70,7 +70,7 @@ const Login = () => {
             navigate("/browse");
           }
         } catch (err) {
-          toast.error(err.response.data.message);
+          toast.error(err?.response?.data?.message);
           email.current.value = "";
           password.current.value = "";
         }
