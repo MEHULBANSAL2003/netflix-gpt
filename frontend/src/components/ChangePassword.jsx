@@ -85,6 +85,9 @@ const ChangePassword = () => {
       toast.error(err?.response?.data?.message);
     }
   };
+  const clearError = () => {
+    setError(null);
+  };
 
   const handleCancelClick=()=>{
       navigate("/browse");
@@ -112,6 +115,7 @@ const ChangePassword = () => {
               ref={currentPassword}
               id="current-password"
               type="password"
+              onChange={clearError}
               placeholder="Enter your current password"
               className="w-full mt-2 p-3 rounded  text-black border border-gray-700"
             />
@@ -127,6 +131,7 @@ const ChangePassword = () => {
               ref={newPassword}
               id="new-password"
               type="password"
+              onChange={clearError}
               placeholder="Enter your new password"
               className="w-full mt-2 p-3 rounded text-black border border-gray-700"
             />
@@ -145,6 +150,7 @@ const ChangePassword = () => {
               ref={reEnteredPassword}
               id="reenter-password"
               type="password"
+              onChange={clearError}
               placeholder="Re-enter new password"
               className="w-full mt-2 p-3 rounded text-black border border-gray-700"
             />

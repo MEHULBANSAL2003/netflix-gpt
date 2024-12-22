@@ -13,7 +13,13 @@ const persistConfig = {
  const appStore=configureStore({
     reducer:{
       user:persistedReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+      },
+    }),
 })
 
 const persistor = persistStore(appStore);
