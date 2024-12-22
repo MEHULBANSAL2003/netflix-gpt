@@ -95,5 +95,30 @@ const getUser=async(req,res)=>{
 };
 
 
+const changePassword= async(req,res)=>{
+  try{
+  const {password}=req.body;
+   const isPasswordCorrect=await bcrypt.compare(password,req.user.password);
 
-module.exports={handleSignUp,handleLogin,handleLogout,getUser};
+   if(!isPasswordCorrect) throw new Error("Password is incorrect");
+
+   res.status(200).json({
+      result:"success",
+      message:"password matched"
+
+   })
+
+  }
+  catch(err){
+    res.status(400).json({
+      result:"error",
+      message:err.message
+ })
+  }
+
+   
+};
+
+
+
+module.exports={handleSignUp,handleLogin,handleLogout,getUser,changePassword};
