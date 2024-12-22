@@ -95,7 +95,7 @@ const getUser=async(req,res)=>{
 };
 
 
-const changePassword= async(req,res)=>{
+const checkUser= async(req,res)=>{
   try{
   const {password}=req.body;
    const isPasswordCorrect=await bcrypt.compare(password,req.user.password);
@@ -119,6 +119,20 @@ const changePassword= async(req,res)=>{
    
 };
 
+const changePassword=async(req,res)=>{
+  const {email,password}=req.body;
+
+  const hashedPassword=await bcrypt.hash(password,10);
+  
+  const user=await User.findOneAndUpdate({email:email},{password:hashedPassword});
+  if(!user) throw new Error("user doesn't exist");
+
+  res.status(200).json({
+    result:"success",
+    message:"password updated successfully"
+  })
+}
 
 
-module.exports={handleSignUp,handleLogin,handleLogout,getUser,changePassword};
+
+module.exports={handleSignUp,handleLogin,handleLogout,getUser,changePassword,checkUser};

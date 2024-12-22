@@ -38,3 +38,20 @@ export const checkSignUpValidData = (name, email, password) => {
 
   return null;
 };
+
+
+export const validateNewPassword=(password)=>{
+
+  if (password === "") return "Password is required";
+
+  
+  const isPasswordVlaid =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
+      password
+    );
+
+    if (!isPasswordVlaid) return "Password is not valid";
+
+    return null;
+
+}

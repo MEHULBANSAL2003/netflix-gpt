@@ -1,5 +1,5 @@
 const express=require("express");
-const { handleSignUp, handleLogin, handleLogout,getUser,changePassword } = require("../controllers/user");
+const { handleSignUp, handleLogin, handleLogout,getUser,checkUser, changePassword } = require("../controllers/user");
 const { userAuth } = require("../middlewares/auth");
 const userRouter=express.Router();
 
@@ -13,7 +13,9 @@ userRouter.post("/logout",handleLogout);
 
 userRouter.get("/getUserByToken",userAuth,getUser);
 
-userRouter.post("/change-password",userAuth,changePassword); 
+userRouter.post("/check-user",userAuth,checkUser); 
+
+userRouter.post("/change-password",changePassword);
 
 
 
