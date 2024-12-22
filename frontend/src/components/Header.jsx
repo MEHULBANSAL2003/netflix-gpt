@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NETFLIX_LOGO, USER_ICON } from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";

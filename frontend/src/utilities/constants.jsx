@@ -3,3 +3,12 @@ export const NETFLIX_LOGO="https://help.nflxext.com/helpcenter/OneTrust/oneTrust
 export const BG_IMAGE="https://assets.nflxext.com/ffe/siteui/vlv3/729ce5c2-d831-436a-8c9d-f38fea0b99b3/web/IN-en-20241209-TRIFECTA-perspective_4aef76eb-7d5b-4be0-93c0-5f67320fd878_small.jpg";
 
 export const USER_ICON="https://occ-0-4837-3647.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABTZ2zlLdBVC05fsd2YQAR43J6vB1NAUBOOrxt7oaFATxMhtdzlNZ846H3D8TZzooe2-FT853YVYs8p001KVFYopWi4D4NXM.png?r=229";
+
+
+export const API_OPTIONS={
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDA2OTE5OTQ1MDQ3MjYyMzYyMDNhMWExMGFkODdjYyIsIm5iZiI6MTczNDg4MjIzMC4zNiwic3ViIjoiNjc2ODMzYjY1MmFiMTJkZmVhNWU0MWY2Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.TR4peiVfl8khmwNfQJ6kPkOyc9UyvbPPjSvp3vwkkYM'
+  }
+}; 
