@@ -9,6 +9,7 @@ import { setUser } from "./redux/userSlice";
 const Login = lazy(() => import("./components/Login"));
 const Home = lazy(() => import("./components/Home"));
 const Browse = lazy(() => import("./components/Browse"));
+const ChangePassword=lazy(()=>import("./components/ChangePassword"));
 
 function App() {
   const user = useSelector((store) => store.user);
@@ -56,7 +57,13 @@ function App() {
           path={"/browse"}
           element={user.email ? <Browse /> : <Navigate to="/login" />}
         />
+            <Route
+          path={"/change-password"}
+          element={user.email ? <ChangePassword /> : <Navigate to="/login" />}
+        />
+      
       </Routes>
+      
       </Suspense>
 
       <ToastContainer />

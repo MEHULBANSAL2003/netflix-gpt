@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NETFLIX_LOGO, USER_ICON } from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -47,6 +47,7 @@ const Header = () => {
             <li className="px-4 py-2 cursor-pointer">{userInfo.name}</li>
             <li className="px-4 py-2 cursor-pointer">Manage Account</li>
             <li className="px-4 py-2 cursor-pointer">Settings</li>
+           <li className="px-4 py-2 cursor-pointer"><Link to="/change-password">Change Password </Link></li>
             <li
               className="px-14 py-4 cursor-pointer font-bold hover:underline underline-offset-2 decoration-2"
               onClick={handleLogout}
