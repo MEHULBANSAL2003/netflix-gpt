@@ -2,30 +2,33 @@ import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Body from "./Body";
 import Header from "./Header";
-import {checkSignInValidData,checkSignUpValidData,} from "../utilities/validation";
+import {
+  checkSignInValidData,
+  checkSignUpValidData,
+} from "../utilities/validation";
 import axios from "axios";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [errMessage, setErrMessage] = useState(null);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
- 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
 
-const handleForgotPasword=()=>{
-  // to be implemented later..!!
-
-}
+  const handleForgotPasword = () => {
+    // to be implemented later..!!
+  };
+  const clearError = () => {
+    setErrMessage(null);
+  };
 
   const togglePasswordVisibility = () => {
     if (password.current) {
@@ -58,14 +61,13 @@ const handleForgotPasword=()=>{
 
           if (response.data.result == "success") {
             toast.success(response.data.message);
-            const mail=email.current.value;
-          const Name=response?.data?.data?.name;
-            dispatch(setUser({name:Name,email:mail}));
+            const mail = email.current.value;
+            const Name = response?.data?.data?.name;
+            dispatch(setUser({ name: Name, email: mail }));
             email.current.value = "";
             password.current.value = "";
-            
+
             navigate("/browse");
-            
           }
         } catch (err) {
           toast.error(err.response.data.message);
@@ -97,10 +99,10 @@ const handleForgotPasword=()=>{
 
           if (response.data.result == "success") {
             toast.success(response.data.message);
-            const mail=email.current.value;
-             const Name=name.current.value
-            dispatch(setUser({name:Name,email:mail}));
-           
+            const mail = email.current.value;
+            const Name = name.current.value;
+            dispatch(setUser({ name: Name, email: mail }));
+
             name.current.value = "";
             email.current.value = "";
             password.current.value = "";
@@ -135,6 +137,7 @@ const handleForgotPasword=()=>{
           <input
             ref={name}
             type="text"
+            onChange={clearError}
             placeholder="Full name"
             className="p-3 my-3 w-full rounded bg-transparent border border-gray-400"
           />
@@ -145,6 +148,7 @@ const handleForgotPasword=()=>{
         <input
           ref={email}
           type="text"
+          onChange={clearError}
           placeholder="Enter your email"
           className="p-3 my-3 w-full rounded bg-transparent border border-gray-400"
         />
@@ -156,6 +160,7 @@ const handleForgotPasword=()=>{
           <input
             ref={password}
             type="password"
+            onChange={clearError}
             placeholder="Password"
             className="p-3 w-full rounded bg-transparent border border-gray-400 pr-12"
           />
@@ -167,10 +172,16 @@ const handleForgotPasword=()=>{
             {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
           </button>
         </div>
-        {isSignIn && <p className="cursor-pointer text-slate-200" onClick={handleForgotPasword}>Forgot Password?</p>}
-
         {errMessage && errMessage.charAt(0) == "P" && (
           <p className="text-red-500 font-bold py-0">{errMessage}</p>
+        )}
+        {isSignIn && (
+          <p
+            className="cursor-pointer text-slate-200"
+            onClick={handleForgotPasword}
+          >
+            Forgot Password?
+          </p>
         )}
 
         <button
