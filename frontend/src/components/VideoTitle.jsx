@@ -6,10 +6,10 @@ const VideoTitle = ({ title, overview }) => {
   return (
     <div
       style={{ height: "90vh" }}
-      className="w-screen pt-[15%] px-12 absolute text-white bg-gradient-to-r from-black"
+      className="w-screen pt-[20%] px-20 absolute text-white bg-gradient-to-r from-black"
     >
       <h1 className="text-6xl font-bold">{title}</h1>
-      <h2 className="py-6 text-lg w-1/4">{overview}</h2>
+      <h2 className="py-6 text-lg w-2/5">{overview}</h2>
 
       <div className="flex">
         <button className="flex items-center bg-white text-black p-3 px-10 text-xl rounded hover:bg-opacity-80">

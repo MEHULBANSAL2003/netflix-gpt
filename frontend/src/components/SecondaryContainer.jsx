@@ -1,7 +1,12 @@
 import React from "react";
 
 const SecondaryContainer = () => {
-  return <div>secondary container</div>;
+  return (
+    <div>
+
+        
+    </div>
+  )
 };
 
 export default SecondaryContainer;
