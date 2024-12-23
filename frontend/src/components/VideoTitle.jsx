@@ -5,10 +5,10 @@ import { MdInfoOutline } from "react-icons/md";
 const VideoTitle = ({ title, overview }) => {
   return (
     <div
-      style={{ height: "90vh" }}
-      className="w-screen pt-[20%] px-20 absolute text-white bg-gradient-to-r from-black"
+    
+      className="w-screen aspect-video pt-[20%] px-20 absolute text-white bg-gradient-to-r from-black"
     >
-      <h1 className="text-6xl font-bold">{title}</h1>
+      <h1 className=" text-6xl font-bold">{title}</h1>
       <h2 className="py-6 text-lg w-2/5">{overview}</h2>
 
       <div className="flex">
