@@ -10,6 +10,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const Browse = lazy(() => import("./pages/Browse"));
 const ChangePassword = lazy(() => import("./pages/ChangePassword"));
+const GptSearch=lazy(()=>import("./pages/GptSearch"))
 
 function App() {
   const user = useSelector((store) => store.user);
@@ -64,6 +65,10 @@ function App() {
           <Route
             path={"/change-password"}
             element={user.email ? <ChangePassword /> : <Navigate to="/login" />}
+          />
+           <Route
+            path={"/gpt-search"}
+            element={user.email ? <GptSearch /> : <Navigate to="/login" />}
           />
         </Routes>
       </Suspense>
