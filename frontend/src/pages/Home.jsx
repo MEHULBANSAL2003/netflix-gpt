@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header';
 import { BG_IMAGE } from '../utilities/constants';
 import { Link } from 'react-router-dom';
 

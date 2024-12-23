@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Header from "./Header";
+import Header from "../components/Header";
 import axios from "axios";
 import { validateNewPassword } from "../utilities/validation";
 import { toast } from "react-toastify";

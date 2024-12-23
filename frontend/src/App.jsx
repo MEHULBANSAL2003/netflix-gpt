@@ -6,14 +6,16 @@ import React, { useEffect,Suspense ,lazy} from "react";
 import axios from "axios";
 import { setUser } from "./redux/userSlice";
 
-const Login = lazy(() => import("./components/Login"));
-const Home = lazy(() => import("./components/Home"));
-const Browse = lazy(() => import("./components/Browse"));
-const ChangePassword=lazy(()=>import("./components/ChangePassword"));
+const Login = lazy(() => import("./pages/Login"));
+const Home = lazy(() => import("./pages/Home"));
+const Browse = lazy(() => import("./pages/Browse"));
+const ChangePassword=lazy(()=>import("./pages/ChangePassword"));
 
 function App() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
+  console.log(user);  
 
   useEffect(() => {
     const getUser = async () => {
@@ -24,7 +26,8 @@ function App() {
           url: URL,
           withCredentials: true,
         });
-
+           
+        console.log(response);
         if (response.data.result == "success") {
           if (!user.email) {
             const name = response.data.data.name;
@@ -32,7 +35,9 @@ function App() {
             dispatch(setUser({ name, email }));
           }
         }
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     getUser();

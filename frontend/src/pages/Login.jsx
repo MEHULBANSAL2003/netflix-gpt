@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import Body from "./Body";
-import Header from "./Header";
+import Body from "../components/Body";
+import Header from "../components/Header";
 import {
   checkSignInValidData,
   checkSignUpValidData,
