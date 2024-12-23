@@ -12,3 +12,6 @@ export const API_OPTIONS={
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDA2OTE5OTQ1MDQ3MjYyMzYyMDNhMWExMGFkODdjYyIsIm5iZiI6MTczNDg4MjIzMC4zNiwic3ViIjoiNjc2ODMzYjY1MmFiMTJkZmVhNWU0MWY2Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.TR4peiVfl8khmwNfQJ6kPkOyc9UyvbPPjSvp3vwkkYM'
   }
 }; 
+
+
+export const MOVIE_POSTER_URL="https://image.tmdb.org/t/p/w300_and_h450_bestv2/";

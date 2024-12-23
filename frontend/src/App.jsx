@@ -13,9 +13,7 @@ const ChangePassword=lazy(()=>import("./pages/ChangePassword"));
 
 function App() {
   const user = useSelector((store) => store.user);
-  const dispatch = useDispatch();
-
-  console.log(user);  
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     const getUser = async () => {
@@ -26,8 +24,6 @@ function App() {
           url: URL,
           withCredentials: true,
         });
-           
-        console.log(response);
         if (response.data.result == "success") {
           if (!user.email) {
             const name = response.data.data.name;
