@@ -4,15 +4,13 @@ import SecondaryContainer from "../components/SecondaryContainer";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 
 const Browse = () => {
-   
-  useNowPlayingMovies(); 
-
+  useNowPlayingMovies();
 
   return (
     <div>
       <Header />
-      <MainContainer/>
-      <SecondaryContainer/>
+      <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 };

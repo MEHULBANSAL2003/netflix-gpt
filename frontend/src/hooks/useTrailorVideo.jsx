@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
-import { useDispatch} from 'react-redux';
-import { API_OPTIONS } from '../utilities/constants';
-import { addTrailorVideo } from '../redux/movieSlice';
-import axios from 'axios';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { API_OPTIONS } from "../utilities/constants";
+import { addTrailorVideo } from "../redux/movieSlice";
+import axios from "axios";
 const useTrailorVideo = (movieId) => {
-    const dispatch = useDispatch();
-
- 
+  const dispatch = useDispatch();
 
   const getMovieVideo = async () => {
     const data = await axios(
@@ -31,6 +29,6 @@ const useTrailorVideo = (movieId) => {
   useEffect(() => {
     getMovieVideo();
   }, []);
-}
+};
 
-export default useTrailorVideo
+export default useTrailorVideo;

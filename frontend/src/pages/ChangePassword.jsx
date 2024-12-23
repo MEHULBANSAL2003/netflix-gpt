@@ -89,9 +89,9 @@ const ChangePassword = () => {
     setError(null);
   };
 
-  const handleCancelClick=()=>{
-      navigate("/browse");
-  }
+  const handleCancelClick = () => {
+    navigate("/browse");
+  };
 
   return (
     <div className="bg-slate-50">
@@ -158,13 +158,13 @@ const ChangePassword = () => {
               <h1 className="text-red-700">{error}</h1>
             )}
           </div>
-            <button
-             type="submit"
-             onClick={handleCancelClick}
-             className="w-20 py-3 bg-slate-50 border border-gray-700 text-black rounded mx-1"
-            >
-              Cancel
-            </button>
+          <button
+            type="submit"
+            onClick={handleCancelClick}
+            className="w-20 py-3 bg-slate-50 border border-gray-700 text-black rounded mx-1"
+          >
+            Cancel
+          </button>
           <button
             onClick={handleChangePassword}
             type="submit"

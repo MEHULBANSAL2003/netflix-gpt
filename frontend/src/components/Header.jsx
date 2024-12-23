@@ -2,7 +2,7 @@ import React from "react";
 import { NETFLIX_LOGO, USER_ICON } from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,7 @@ const Header = () => {
   const userInfo = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const handleLogout = async () => {
     const URL = `${import.meta.env.VITE_BACKEND_URL}/logout`;
 
@@ -41,22 +41,24 @@ const Header = () => {
           <img src={USER_ICON} alt="user_info" className="rounded" />
         )}
 
-      {userInfo.email && 
-        <div className="absolute right-0 mt-2 w-48 bg-black  text-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <ul className="py-2">
-            <li className="px-4 py-2 cursor-pointer">{userInfo.name}</li>
-            <li className="px-4 py-2 cursor-pointer">Manage Account</li>
-            <li className="px-4 py-2 cursor-pointer">Settings</li>
-           <li className="px-4 py-2 cursor-pointer"><Link to="/change-password">Change Password </Link></li>
-            <li
-              className="px-14 py-4 cursor-pointer font-bold hover:underline underline-offset-2 decoration-2"
-              onClick={handleLogout}
-            >
-              Logout
-            </li>
-          </ul>
-        </div>
-}
+        {userInfo.email && (
+          <div className="absolute right-0 mt-2 w-48 bg-black  text-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <ul className="py-2">
+              <li className="px-4 py-2 cursor-pointer">{userInfo.name}</li>
+              <li className="px-4 py-2 cursor-pointer">Manage Account</li>
+              <li className="px-4 py-2 cursor-pointer">Settings</li>
+              <li className="px-4 py-2 cursor-pointer">
+                <Link to="/change-password">Change Password </Link>
+              </li>
+              <li
+                className="px-14 py-4 cursor-pointer font-bold hover:underline underline-offset-2 decoration-2"
+                onClick={handleLogout}
+              >
+                Logout
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

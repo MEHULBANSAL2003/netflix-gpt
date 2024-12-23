@@ -30,7 +30,7 @@ export const checkSignUpValidData = (name, email, password) => {
       password
     );
 
-  const isNameValid = /^[a-zA-Z]+([ '-][a-zA-Z]+)*$/ .test(name);
+  const isNameValid = /^[a-zA-Z]+([ '-][a-zA-Z]+)*$/.test(name);
 
   if (!isNameValid) return "Name is not valid";
   if (!isEmailValid) return "Email is not valid";
@@ -39,19 +39,15 @@ export const checkSignUpValidData = (name, email, password) => {
   return null;
 };
 
-
-export const validateNewPassword=(password)=>{
-
+export const validateNewPassword = (password) => {
   if (password === "") return "Password is required";
 
-  
   const isPasswordVlaid =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(
       password
     );
 
-    if (!isPasswordVlaid) return "Password is not valid";
+  if (!isPasswordVlaid) return "Password is not valid";
 
-    return null;
-
-}
+  return null;
+};
