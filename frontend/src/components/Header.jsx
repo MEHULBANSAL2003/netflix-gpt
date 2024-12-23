@@ -36,7 +36,8 @@ const Header = () => {
   };
 
   const handleSearchButtonToggle=()=>{
-    dispatch(toggleGptSearchView())
+    dispatch(toggleGptSearchView());
+    navigate('/gpt-search');
 
   }
 
@@ -44,9 +45,10 @@ const Header = () => {
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex items-center justify-between w-full">
       <img className="w-44" src={NETFLIX_LOGO} alt="Netflix Logo" />
       <div className="relative flex items-center space-x-4">
-        <div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
+        {<div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
           <IoSearchSharp className="text-xl mr-2" />
         </div>
+        }
         {userInfo.email && (
           <div className="relative group">
             <img
