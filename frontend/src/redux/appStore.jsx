@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
 import userReducer from "./userSlice";
 import movieReducer from "./movieSlice";
+import gptReducer from "./gptSlice"
 
 const persistConfig = {
   key: "root",
@@ -15,6 +16,7 @@ const appStore = configureStore({
   reducer: {
     user: persistedReducer,
     movies: movieReducer,
+    gpt:gptReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
