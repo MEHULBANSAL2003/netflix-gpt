@@ -6,6 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { IoSearchSharp } from "react-icons/io5";
+import { toggleGptSearchView } from "../redux/gptSlice";
+
 
 const Header = () => {
   const userInfo = useSelector((store) => store.user);
@@ -33,11 +35,16 @@ const Header = () => {
     }
   };
 
+  const handleSearchButtonToggle=()=>{
+    dispatch(toggleGptSearchView())
+
+  }
+
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex items-center justify-between w-full">
       <img className="w-44" src={NETFLIX_LOGO} alt="Netflix Logo" />
       <div className="relative flex items-center space-x-4">
-        <div className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
+        <div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
           <IoSearchSharp className="text-xl mr-2" />
         </div>
         {userInfo.email && (
