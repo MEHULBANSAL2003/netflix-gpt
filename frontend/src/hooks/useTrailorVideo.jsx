@@ -21,8 +21,6 @@ const useTrailorVideo = (movieId) => {
     const trailorVideo = filteredTrailerVideos.length
       ? filteredTrailerVideos[0]
       : json.results[0];
-
-    //console.log(trailorVideo);
     dispatch(addTrailorVideo(trailorVideo));
   };
 

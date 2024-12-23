@@ -15,27 +15,27 @@ function App() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const URL = `${import.meta.env.VITE_BACKEND_URL}/getUserByToken`;
-        const response = await axios({
-          method: "get",
-          url: URL,
-          withCredentials: true,
-        });
-        if (response.data.result == "success") {
-          if (!user.email) {
-            const name = response.data.data.name;
-            const email = response.data.data.email;
-            dispatch(setUser({ name, email }));
-          }
+  const getUser = async () => {
+    try {
+      const URL = `${import.meta.env.VITE_BACKEND_URL}/getUserByToken`;
+      const response = await axios({
+        method: "get",
+        url: URL,
+        withCredentials: true,
+      });
+      if (response.data.result == "success") {
+        if (!user.email) {
+          const name = response.data.data.name;
+          const email = response.data.data.email;
+          dispatch(setUser({ name, email }));
         }
-      } catch (err) {
-        console.log(err);
       }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     getUser();
   }, []);
 
