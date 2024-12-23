@@ -8,11 +8,11 @@ const VideoBackground = ({ movieId }) => {
   const trailorId = useSelector((store) => store.movies?.trailorVideo);
 
   return (
-    <div>
+    <div className="">
       <iframe
-        width="560"
-        height="315"
-        src={"https://www.youtube.com/embed/" + trailorId?.key}
+      style={{ height: "90vh" }}
+        className="w-screen"
+        src={"https://www.youtube.com/embed/" + trailorId?.key+"?&autoplay=1&mute=1"}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
