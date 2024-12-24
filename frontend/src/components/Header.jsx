@@ -1,5 +1,5 @@
 import React from "react";
-import { NETFLIX_LOGO, USER_ICON } from "../utilities/constants";
+import { NETFLIX_LOGO, SUPPORTED_LANGUAGES, USER_ICON } from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";
 import { useNavigate, Link } from "react-router-dom";
@@ -45,7 +45,14 @@ const Header = () => {
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex items-center justify-between w-full">
       <img className="w-44" src={NETFLIX_LOGO} alt="Netflix Logo" />
       <div className="relative flex items-center space-x-4">
-        {<div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
+          
+         {userInfo.email && <select className=" p-2 m-2 bg-gray-950 text-white border border-black">
+            {SUPPORTED_LANGUAGES.map(lang=> <option key={lang.identifer} value={lang.identifer}> {lang.name} </option>)}
+          </select>
+}
+
+
+        {userInfo.email&&<div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
           <IoSearchSharp className="text-xl mr-2" />
         </div>
         }
