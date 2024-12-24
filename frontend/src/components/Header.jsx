@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { IoSearchSharp } from "react-icons/io5";
 import { toggleGptSearchView } from "../redux/gptSlice";
+import { changeLang } from "../redux/languageSlice";
 
 
 const Header = () => {
@@ -40,13 +41,16 @@ const Header = () => {
     navigate('/gpt-search');
 
   }
+  const handleLanguageChange=(e)=>{
+    dispatch(changeLang(e.target.value));
+  }
 
   return (
     <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex items-center justify-between w-full">
       <img className="w-44" src={NETFLIX_LOGO} alt="Netflix Logo" />
       <div className="relative flex items-center space-x-4">
           
-         {userInfo.email && <select className=" p-2 m-2 bg-gray-950 text-white border border-black">
+         {userInfo.email && <select className=" p-2 m-2 bg-gray-950 text-white border border-black" onChange={handleLanguageChange} >
             {SUPPORTED_LANGUAGES.map(lang=> <option key={lang.identifer} value={lang.identifer}> {lang.name} </option>)}
           </select>
 }
