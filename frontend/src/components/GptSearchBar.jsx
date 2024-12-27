@@ -31,7 +31,8 @@ const GptSearchBar = () => {
       return;
     }
     const searchQuery = `Act as a movie recommendation system and suggest some movies for the query : "${searchText?.current?.value}".Only give me name of 10 movies,comma separated like the example result given ahead. Example Result: Gadar,sholay,don, golmal...`;
-
+    
+    searchText.current.value="";
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: searchQuery }],
       model: "gpt-3.5-turbo",
