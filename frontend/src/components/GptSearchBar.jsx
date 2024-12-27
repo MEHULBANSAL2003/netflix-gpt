@@ -28,6 +28,9 @@ const GptSearchBar = () => {
     return data?.data?.results;
   };
 
+  const clearError=()=>{
+    setError(null);
+  }
   const handleGptSearch = async () => {
     if (searchText?.current?.value === "") {
       setError("Input Field is empty.Please enter what you want to search for..!!")
@@ -69,12 +72,16 @@ const GptSearchBar = () => {
 
   return (
     <div>
-    <div className="pt-[10%] flex justify-center">
-      <form className="w-1/2 bg-black grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
+    <div className="pt-[10%] flex flex-col items-center">
+      <form
+        className="w-1/2 bg-black grid grid-cols-12"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <input
           ref={searchText}
           type="text"
           className="p-4 m-4 col-span-9"
+          onChange={clearError}
           placeholder={lang[currLang].gptSearchPlaceholder}
         />
         <button
@@ -87,11 +94,19 @@ const GptSearchBar = () => {
           {loading ? "Loading..." : lang[currLang].search}
         </button>
       </form>
-      
-      {loading && <Loader />}
+      {error && (
+        <h1 className="mt-2 text-center bg-black bg-opacity-90   text-red-600 font-semibold text-lg">
+          {error}
+        </h1>
+      )}
     </div>
-   {error&& <h1 className=" justify-center text-red-600 text-center">{error}</h1>}
-    </div>
+    {loading && (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <Loader />
+      </div>
+    )}
+  </div>
+  
   );
 };
 
