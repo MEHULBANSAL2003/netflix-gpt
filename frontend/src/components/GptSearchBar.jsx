@@ -15,6 +15,7 @@ const GptSearchBar = () => {
   const searchText = useRef(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false); 
+  const [error,setError]=useState(null);
 
   const searchMovie = async (movie) => {
     const data = await axios(
@@ -29,7 +30,7 @@ const GptSearchBar = () => {
 
   const handleGptSearch = async () => {
     if (searchText?.current?.value === "") {
-      toast.error("Please enter what you want to search for..!!");
+      setError("Input Field is empty.Please enter what you want to search for..!!")
       return;
     }
 
@@ -67,6 +68,7 @@ const GptSearchBar = () => {
   };
 
   return (
+    <div>
     <div className="pt-[10%] flex justify-center">
       <form className="w-1/2 bg-black grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
         <input
@@ -85,7 +87,10 @@ const GptSearchBar = () => {
           {loading ? "Loading..." : lang[currLang].search}
         </button>
       </form>
+      
       {loading && <Loader />}
+    </div>
+   {error&& <h1 className=" justify-center text-red-600 text-center">{error}</h1>}
     </div>
   );
 };
