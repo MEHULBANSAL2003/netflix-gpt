@@ -26,6 +26,10 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearch = async () => {
+    if(searchText?.current?.value==""){
+      toast.error("Please enter what you want to search for..!!");
+      return;
+    }
     const searchQuery = `Act as a movie recommendation system and suggest some movies for the query : "${searchText?.current?.value}".Only give me name of 10 movies,comma separated like the example result given ahead. Example Result: Gadar,sholay,don, golmal...`;
 
     const gptResults = await openai.chat.completions.create({
@@ -41,6 +45,7 @@ const GptSearchBar = () => {
       toast.error("Sorry..!! No movie found.");
       searchText.current.value = "";
       navigate("/gpt-search");
+      return;
     }
 
     const gptMovies = gptResults.choices[0]?.message?.content.split(",");
