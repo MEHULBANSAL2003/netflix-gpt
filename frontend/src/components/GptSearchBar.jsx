@@ -1,50 +1,55 @@
 import React, { useRef } from "react";
 import lang from "../utilities/languageConstants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import openai from "../utilities/openai";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_OPTIONS } from "../utilities/constants";
+import { addGptMoviesResult } from "../redux/gptSlice";
 
 const GptSearchBar = () => {
   const currLang = useSelector((store) => store.lang.lang);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const searchText = useRef(null);
+  const dispatch = useDispatch();
 
-  const searchMovie=async(movie)=>{
-
-    const data=await axios("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&language=en-US&page=1",API_OPTIONS);
+  const searchMovie = async (movie) => {
+    const data = await axios(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    );
 
     return data?.data?.results;
+  };
 
-  }
-  
   const handleGptSearch = async () => {
     const searchQuery = `Act as a movie recommendation system and suggest some movies for the query : "${searchText?.current?.value}".Only give me name of 10 movies,comma separated like the example result given ahead. Example Result: Gadar,sholay,don, golmal...`;
- 
+
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: searchQuery }],
       model: "gpt-3.5-turbo",
     });
 
- 
- 
-    if(!gptResults.choices||gptResults.choices[0].message.content.includes("movie recommendations")||gptResults.choices[0].message.content.includes("movies")){
+    if (
+      !gptResults.choices ||
+      gptResults.choices[0].message.content.includes("movie recommendations") ||
+      gptResults.choices[0].message.content.includes("movies")
+    ) {
       toast.error("Sorry..!! No movie found.");
-      searchText.current.value="";
-        navigate("/gpt-search");
-
-      
+      searchText.current.value = "";
+      navigate("/gpt-search");
     }
 
-    const gptMovies=gptResults.choices[0]?.message?.content.split(",");
-    
-    const promiseData= gptMovies.map(movie=> searchMovie(movie));
+    const gptMovies = gptResults.choices[0]?.message?.content.split(",");
 
-      const promiseResult= await Promise.all(promiseData);
+    const promiseData = gptMovies.map((movie) => searchMovie(movie));
 
-      console.log(promiseResult);
+    const movie_promiseResult = await Promise.all(promiseData);
+
+    dispatch(addGptMoviesResult({movieNames:gptMovies,movieResults:movie_promiseResult}));
   };
 
   return (
