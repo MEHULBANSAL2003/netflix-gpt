@@ -4,14 +4,21 @@ import { useSelector } from "react-redux";
 import openai from "../utilities/openai";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_OPTIONS } from "../utilities/constants";
 
 const GptSearchBar = () => {
   const currLang = useSelector((store) => store.lang.lang);
   const navigate=useNavigate();
-
   const searchText = useRef(null);
 
-  
+  const searchMovie=async(movie)=>{
+
+    const data=await axios("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&language=en-US&page=1",API_OPTIONS);
+
+    return data?.data?.results;
+
+  }
   
   const handleGptSearch = async () => {
     const searchQuery = `Act as a movie recommendation system and suggest some movies for the query : "${searchText?.current?.value}".Only give me name of 10 movies,comma separated like the example result given ahead. Example Result: Gadar,sholay,don, golmal...`;
@@ -21,9 +28,9 @@ const GptSearchBar = () => {
       model: "gpt-3.5-turbo",
     });
 
-    console.log(gptResults);
-
-    if(gptResults.choices[0].message.content.includes("movie recommendations")||gptResults.choices[0].message.content.includes("movies")){
+ 
+ 
+    if(!gptResults.choices||gptResults.choices[0].message.content.includes("movie recommendations")||gptResults.choices[0].message.content.includes("movies")){
       toast.error("Sorry..!! No movie found.");
       searchText.current.value="";
         navigate("/gpt-search");
@@ -31,7 +38,13 @@ const GptSearchBar = () => {
       
     }
 
-    console.log(gptResults.choices[0].message.content);
+    const gptMovies=gptResults.choices[0]?.message?.content.split(",");
+    
+    const promiseData= gptMovies.map(movie=> searchMovie(movie));
+
+      const promiseResult= await Promise.all(promiseData);
+
+      console.log(promiseResult);
   };
 
   return (
