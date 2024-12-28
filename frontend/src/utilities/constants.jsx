@@ -12,7 +12,7 @@ export const API_OPTIONS = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDA2OTE5OTQ1MDQ3MjYyMzYyMDNhMWExMGFkODdjYyIsIm5iZiI6MTczNDg4MjIzMC4zNiwic3ViIjoiNjc2ODMzYjY1MmFiMTJkZmVhNWU0MWY2Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.TR4peiVfl8khmwNfQJ6kPkOyc9UyvbPPjSvp3vwkkYM",
+      `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
   },
 };
 
