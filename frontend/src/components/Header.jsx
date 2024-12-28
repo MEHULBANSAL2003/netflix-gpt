@@ -1,5 +1,9 @@
 import React from "react";
-import { NETFLIX_LOGO, SUPPORTED_LANGUAGES, USER_ICON } from "../utilities/constants";
+import {
+  NETFLIX_LOGO,
+  SUPPORTED_LANGUAGES,
+  USER_ICON,
+} from "../utilities/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userSlice";
 import { useNavigate, Link } from "react-router-dom";
@@ -8,7 +12,6 @@ import { toast } from "react-toastify";
 import { IoSearchSharp } from "react-icons/io5";
 import { toggleGptSearchView } from "../redux/gptSlice";
 import { changeLang } from "../redux/languageSlice";
-
 
 const Header = () => {
   const userInfo = useSelector((store) => store.user);
@@ -36,34 +39,50 @@ const Header = () => {
     }
   };
 
-  const handleSearchButtonToggle=()=>{
+  const handleSearchButtonToggle = () => {
     dispatch(toggleGptSearchView());
-    navigate('/gpt-search');
-
-  }
-  const handleLanguageChange=(e)=>{
+    navigate("/gpt-search");
+  };
+  const handleLanguageChange = (e) => {
     dispatch(changeLang(e.target.value));
-  }
+  };
 
-  const handleLogoClick=()=>{
-  navigate('/browse');
-  }
+  const handleLogoClick = () => {
+    navigate("/browse");
+  };
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex items-center justify-between w-full">
-      <img className="w-44 hover:cursor-pointer" src={NETFLIX_LOGO} alt="Netflix Logo" onClick={handleLogoClick} />
-      <div className="relative flex items-center space-x-4">
-          
-         {userInfo.email && <select className=" p-2 m-2 bg-gray-950 text-white border border-black" onChange={handleLanguageChange} >
-            {SUPPORTED_LANGUAGES.map(lang=> <option key={lang.identifer} value={lang.identifer}> {lang.name} </option>)}
+    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 flex  flex-col md:flex-row items-center sm:justify-center md:justify-between w-full">
+      <img
+        className="w-44 hover:cursor-pointer"
+        src={NETFLIX_LOGO}
+        alt="Netflix Logo"
+        onClick={handleLogoClick}
+      />
+      <div className="relative flex items-center">
+        {userInfo.email && (
+          <select
+            className=" p-2 m-2 bg-gray-950 text-white border border-black"
+            onChange={handleLanguageChange}
+          >
+            {SUPPORTED_LANGUAGES.map((lang) => (
+              <option key={lang.identifer} value={lang.identifer}>
+                {" "}
+                {lang.name}{" "}
+              </option>
+            ))}
           </select>
-}
+        )}
 
-
-        {userInfo.email&&<div onClick={handleSearchButtonToggle} className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer">
-          <IoSearchSharp className="text-xl mr-2" />
-        </div>
-        }
+        {userInfo.email && (
+          <div
+            onClick={handleSearchButtonToggle}
+            className="flex items-center text-white rounded-full px-4 py-2 hover:bg-gray-900 hover:cursor-pointer"
+          >
+            <IoSearchSharp className="text-xl mr-2" />
+          </div>
+        )}
+        <div>
         {userInfo.email && (
           <div className="relative group">
             <img
@@ -95,6 +114,7 @@ const Header = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

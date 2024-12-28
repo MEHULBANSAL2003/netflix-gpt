@@ -11,6 +11,7 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
+import { BG_IMAGE } from "../utilities/constants";
 
 const Login = () => {
   let [isSignIn, setIsSignIn] = useState(true);
@@ -127,7 +128,7 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className=" w-3/12 absolute p-12 bg-black bg-opacity-80  my-36 mx-auto right-0 left-0 text-white"
+        className=" w-full md:w-3/12 absolute p-12 bg-black bg-opacity-80  my-36 mx-auto right-0 left-0 text-white"
       >
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign in" : "Sign up"}
@@ -210,7 +211,9 @@ const Login = () => {
         </div>
       </form>
 
-      <Body />
+      <div>
+      <img className="h-screen w-screen object-cover" src={BG_IMAGE} alt="background image" />
+    </div>
     </div>
   );
 };
